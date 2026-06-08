@@ -147,24 +147,78 @@ All results use Lean 4.9.0-rc1 with a maximum generation length of 30,000 tokens
 
 > &#42; Autoregressive 4B re-trained at the matched 4,096-token context used for the diffusion model. The control isolates the diffusion gap as a context-length effect rather than a decoding-strategy one.
 
-<!-- 
+
 ## 5. Models & Dataset Downloads
 
 | Model | Download |
 | --- | --- |
 | Pythagoras-Prover-4B | [🤗 HuggingFace](https://huggingface.co/Pythagoras-LM/Pythagoras-Prover-4B) |
-| Pythagoras-Prover-32B | [🤗 HuggingFace](https://huggingface.co/Pythagoras-LM/Pythagoras-Prover-32B) |
-| Pythagoras-Prover-Diffusion-4B | [🤗 HuggingFace](https://huggingface.co/Pythagoras-LM/Pythagoras-Prover-Diffusion-4B) |
+| Pythagoras-Prover-32B | Coming Soon |
+| Pythagoras-Prover-Diffusion-4B | Comming Soon |
 
-| Resource | Download |
-| --- | --- |
-| Training corpus (Lean-verified + ALF) | [🤗 HuggingFace](https://huggingface.co/Pythagoras-LM) |
-| MiniF2F-ALF benchmark | [🤗 HuggingFace](https://huggingface.co/Pythagoras-LM) |
+| Dataset | Download |
+| -------- | -------- |
+|   Pythagoras-Prover-SFT    |   Coming Soon    |
+|   Pythagoras-Prover-Distill-4B    |   Coming Soon    |
+|    Pythagoras-Prover-Distill-32B    |   Coming Soon    |
 
 > All artefacts are released under the [Pythagoras-LM](https://huggingface.co/Pythagoras-LM) organisation. Confirm the exact repo slugs above match your uploaded repositories.
 
+## 6. Quick Start
 
-## 6. License
+For model inference., <a href="https://github.com/huggingface/transformers" target="_blank" rel="noopener">Huggingface's Transformers</a> can directly be used
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
+
+model_id = "Pythagoras-LM/Pythagoras-Prover-4B"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id,
+    torch_dtype=torch.bfloat16,
+    device_map="auto",
+)
+
+formal_statement = """
+import Mathlib
+import Aesop
+
+set_option maxHeartbeats 0
+
+open BigOperators Real Nat Topology Rat
+
+/-- The volume of a cone is given by the formula $V = \frac{1}{3}Bh$, where $B$ is the area of the base and $h$ is the height. The area of the base of a cone is 30 square units, and its height is 6.5 units. What is the number of cubic units in its volume? Show that it is 65.-/
+theorem mathd_algebra_478 (b h v : ℝ) (h₀ : 0 < b ∧ 0 < h ∧ 0 < v) (h₁ : v = 1 / 3 * (b * h))
+(h₂ : b = 30) (h₃ : h = 13 / 2) : v = 65 := by
+  sorry
+""".strip()
+
+prompt = """
+Complete the following Lean 4 code:
+
+```lean4
+{}```
+
+Before producing the Lean 4 code to formally prove the given theorem, provide a detailed proof plan outlining the main proof steps and strategies.
+The plan should highlight key ideas, intermediate lemmas, and proof structures that will guide the construction of the final formal proof.
+""".strip()
+
+chat = [
+  {"role": "user", "content": prompt.format(formal_statement)},
+]
+
+model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", torch_dtype=torch.bfloat16, trust_remote_code=True)
+inputs = tokenizer.apply_chat_template(chat, tokenize=True, add_generation_prompt=True, return_tensors="pt").to(model.device)
+
+import time
+start = time.time()
+outputs = model.generate(inputs, max_new_tokens=8192)
+print(tokenizer.batch_decode(outputs))
+print(time.time() - start)
+```
+
+<!-- ## 6. License
 
 The code in this repository is released under the license specified in `LICENSE`. Model weights are subject to the license of their base models (Qwen3) and any additional model license included with the release. *(Fill in the concrete license terms before publishing.)* -->
 
