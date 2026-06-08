@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Pythagoras-Prover advances efficient formal proving via augmented Lean formalisation.">
+  <meta name="keywords" content="Pythagoras-Prover, Lean, formal proving, theorem proving">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pythagoras-Prover: Advancing Efficient Formal Proving via Augmented Lean Formalisation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" type="image/png" href="./static/images/pythagoras_favicon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero publication-hero">
+  <div class="hero-body">
+    <div class="container publication-header-container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <div class="publication-title-row">
+            <img class="publication-logo"
+                 src="./figures/pythagoras-website-logo.png"
+                 alt="Pythagoras-Prover logo">
+            <h1 class="title publication-title">Pythagoras-Prover</h1>
+          </div>
+          <p class="publication-subtitle">
+            Advancing Efficient Formal Proving via Augmented Lean Formalisation
+          </p>
+          <div class="publication-authors publication-author-list">
+            <div class="publication-author-row">
+              <span class="author-block">
+                <a href="https://joshuaongg21.github.io/">Joshua Ong Jun Leang</a><sup>p&sup2;,a&sup2;</sup>,</span>
+              <span class="author-block">
+                <a href="https://zsquaredz.github.io/">Zheng Zhao</a><sup>a&sup2;</sup>,</span>
+              <span class="author-block">
+                <a href="https://mihaela-stoian.github.io/">Mihaela C&#259;t&#259;lina Stoian</a><sup>p&sup2;</sup>,</span>
+              <span class="author-block">
+                <a href="https://qiyuan.me/">Qiyuan Xu</a><sup>b&sup2;</sup>,</span>
+            </div>
+            <div class="publication-author-row">
+              <span class="author-block">
+                <a href="https://haonan-li.github.io/">Haonan Li</a><sup>c&sup2;</sup>,</span>
+              <span class="author-block">
+                <a href="https://wenda302.github.io/">Wenda Li</a><sup>a&sup2;</sup>,</span>
+              <span class="author-block">
+                <a href="https://homepages.inf.ed.ac.uk/scohen/">Shay B. Cohen</a><sup>a&sup2;</sup>,</span>
+              <span class="author-block">
+                <a href="https://egiunchiglia.github.io/">Eleonora Giunchiglia</a><sup>p&sup2;</sup></span>
+            </div>
+          </div>
+
+          <div class="publication-affiliations">
+            <span class="affiliation-block"><sup>p&sup2;</sup>Imperial College London</span>
+            <span class="affiliation-block"><sup>a&sup2;</sup>University of Edinburgh</span>
+            <span class="affiliation-block"><sup>b&sup2;</sup>Nanyang Technological University</span>
+            <span class="affiliation-block"><sup>c&sup2;</sup>MBZUAI</span>
+          </div>
+
+          <div class="publication-link-row">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2502.13137"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Hugging Face Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/Pythagoras-LM"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon hf-emoji">&#129303;</span>
+                  <span>HuggingFace</span>
+                  </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark is-disabled"
+                   aria-disabled="true" tabindex="-1">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Introduction. -->
+    <div class="columns is-centered">
+      <div class="column is-12">
+        <h2 class="title is-3 section-title has-text-centered">Introduction</h2>
+        <div class="content has-text-justified">
+          <p>
+            We introduce Pythagoras-Prover, a compute-efficient family of open-source large language models
+            for formal theorem proving in Lean. The family comprises two standard autoregressive models with
+            parameter counts of 4B and 32B together with the first diffusion-based theorem-proving model, which
+            performs iterative refinement over Lean proofs at inference time. Its training recipe centres on a
+            Lean-verified synthetic data pipeline that produces a training corpus across easy, medium, and hard
+            difficulty tiers; complementing the pipeline are a parameter-efficient supervised fine-tuning stage
+            equipped with a dynamic <em>proof-reasoning filtering</em> scheme that retains long proofs within a
+            short context budget, and a final reinforcement-learning stage. Within the data pipeline we propose
+            <em>Augmented Lean Formalisation</em> (ALF), a mutation scheme that expands the training corpus via
+            structured formal variants, paired with a self-distillation stage that re-uses these variants without
+            requiring formal verification. Empirically, Pythagoras-Prover-32B achieves state-of-the-art performance
+            among open-source neural theorem provers, attaining 93.03% on MiniF2F-Test and solving 93 of 672
+            problems on PutnamBench, while Pythagoras-Prover-4B outperforms DeepSeek-Prover-V2-671B on
+            MiniF2F-Test despite being roughly 167&times; smaller. We additionally release <em>MiniF2F-ALF</em>,
+            an ALF-mutated decontamination benchmark on which every evaluated model loses accuracy; on this split,
+            Pythagoras-Prover-32B remains the strongest evaluated prover and Pythagoras-Prover-4B reaches parity
+            with Goedel-Prover-V2-32B, the prior state of the art.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Introduction. -->
+
+    <div class="key-findings-card">
+      <h3>Key Findings and Achievements</h3>
+      <ul>
+        <li>Reaches 89.75% on MiniF2F-Test at Pass@32 and 93.03% at Pass@2048.</li>
+        <li>Pythagoras-Prover-4B attains 86.07% at Pass@32, outperforming DeepSeek-Prover-V2-671B (82.4%) while being roughly 167&times; smaller.</li>
+        <li>Ranks 1st on the PutnamBench leaderboard among open-source models.</li>
+        <li>Releases MiniF2F-ALF, a 488-statement less-saturated benchmark where every evaluated prover degrades.</li>
+        <li>Uses ALF to expand training to ~2M structured Lean variants without per-instance compilation.</li>
+        <li>Introduces Pythagoras-Prover-Diffusion, the first diffusion-based theorem prover for Lean.</li>
+        <li>Uses a compute-efficient recipe: LoRA-only SFT, an 8K context, and an easy/medium/hard curriculum that transfers from 4B to 32B.</li>
+      </ul>
+    </div>
+
+    <figure class="key-findings-figure">
+      <img src="./figures/prover_fig1_hi.png"
+           alt="Pythagoras-Prover benchmark overview">
+    </figure>
+
+  </div>
+</section>
+
+
+<!-- Method. -->
+<section class="section method-section" id="method">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Method</h2>
+    <p class="subtitle is-6" style="color:#6b6b6b; margin-bottom:0;">
+      Our recipe turns a small seed corpus into a state-of-the-art prover in three stages.
+    </p>
+
+    <div class="method-pipeline" id="method-pipeline">
+      <div class="method-step" data-step="0" style="--step-color:#e8743b;">
+        <span class="step-badge">1</span>
+        <h4>Synthetic Data Generation</h4>
+        <p>
+          A compute-efficient pipeline autoformalises and Lean-verifies problems using
+          predominantly sub-30B open models, then applies a failure-mode-conditioned
+          rubric-guided distillation step that re-prompts on each rejected seed to target the
+          specific Lean type-checker error &mdash; yielding a Lean-verified corpus partitioned
+          into easy, medium, and hard tiers.
+        </p>
+        <span class="step-tag">Data &middot; Synthesis</span>
+      </div>
+
+      <div class="method-arrow" data-arrow="0">&#10142;</div>
+
+      <div class="method-step" data-step="1" style="--step-color:#2c91d0;">
+        <span class="step-badge">2</span>
+        <h4>Model Training</h4>
+        <p>
+          A three-stage difficulty-ordered curriculum LoRA-fine-tunes Qwen3-4B and Qwen3-32B
+          under an 8K context using a dynamic <em>proof-reasoning filter</em>, followed by an
+          RL stage with a Lean-compilation reward.
+        </p>
+        <span class="step-tag">Train &middot; Curriculum + RL</span>
+      </div>
+
+      <div class="method-arrow" data-arrow="1">&#10142;</div>
+
+      <div class="method-step" data-step="2" style="--step-color:#2e9e5b;">
+        <span class="step-badge">3</span>
+        <h4>Augmented Lean Formalisation</h4>
+        <p>
+          A mutation scheme systematically expands each Lean statement into ~2M structured
+          formal variants and re-uses them in a self-distillation stage <em>without</em>
+          per-instance Lean compilation, replacing it with a compute-efficient
+          statement-alignment filter.
+        </p>
+        <span class="step-tag">Augment &middot; ALF</span>
+      </div>
+    </div>
+
+    <div class="method-replay has-text-centered">
+      <button class="button is-small is-rounded is-light" id="method-replay-btn">
+        <span class="icon"><i class="fas fa-redo"></i></span>
+        <span>Replay</span>
+      </button>
+    </div>
+
+    <figure class="publication-figure method-figure">
+      <img src="./figures/fig_3_minif2f_alf_cropped_hi.png"
+           alt="MiniF2F-ALF evaluation results">
+    </figure>
+  </div>
+</section>
+<!--/ Method. -->
+
+
+<section class="section" id="experimental-results">
+  <div class="container">
+    <h2 class="title is-3 results-section-title">Experimental Results</h2>
+    <div class="columns is-centered">
+      <div class="column is-12">
+        <h3 class="title is-4 results-subtitle">Benchmarks</h3>
+        <div class="results-copy">
+          <p>
+            Following previous works, we primarily use MiniF2F as our main evaluation benchmark.
+            Additionally, we introduce MiniF2F-ALF, a mutated formal statement within MiniF2F. The
+            benchmarks represent a diverse range of mathematical problems, from high-school level to
+            undergraduate mathematics.
+          </p>
+        </div>
+
+        <h3 class="title is-4 results-subtitle">Main Results</h3>
+        <div class="results-table-card">
+          <div class="table-container results-table-container">
+          <table class="table results-table main-table">
+            <colgroup>
+              <col class="results-model-col">
+              <col class="results-pass-col">
+              <col class="results-performance-col">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Pass</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Tier A: small budget (Pass <= 128) -->
+              <tr class="tier-label"><td colspan="3">Pass &le; 128</td></tr>
+              <tr class="tier-a">
+                <td>Goedel-Prover-SFT</td>
+                <td>32</td>
+                <td>57.6%</td>
+              </tr>
+              <tr class="tier-a">
+                <td>STP</td>
+                <td>128</td>
+                <td>61.2%</td>
+              </tr>
+              <tr class="tier-a">
+                <td>Kimina-Prover-Preview-72B</td>
+                <td>32</td>
+                <td>68.85%</td>
+              </tr>
+              <tr class="tier-a">
+                <td>DeepSeek-Prover-V2-7B</td>
+                <td>32</td>
+                <td>75.6%</td>
+              </tr>
+              <tr class="tier-a">
+                <td>Kimina-Prover-8B</td>
+                <td>32</td>
+                <td>78.3%</td>
+              </tr>
+              <tr class="tier-a">
+                <td>DeepSeek-Prover-V2-671B</td>
+                <td>32</td>
+                <td>82.4%</td>
+              </tr>
+              <tr class="tier-a">
+                <td>Kimina-Prover-70B</td>
+                <td>32</td>
+                <td>84.0%</td>
+              </tr>
+              <tr class="tier-a">
+                <td>Goedel-Prover-V2-8B</td>
+                <td>32</td>
+                <td>84.6%</td>
+              </tr>
+              <tr class="tier-a">
+                <td>Goedel-Prover-V2-8B w/ Self-Correction</td>
+                <td>32</td>
+                <td>86.7%</td>
+              </tr>
+              <tr class="tier-a">
+                <td>Goedel-Prover-V2-32B</td>
+                <td>32</td>
+                <td>88.1%</td>
+              </tr>
+              <tr class="tier-a">
+                <td>Goedel-Prover-V2-32B w/ Self-Correction</td>
+                <td>32</td>
+                <td>90.4%</td>
+              </tr>
+              <tr class="tier-a highlight-row">
+                <td>Pythagoras-Prover-4B</td>
+                <td>32</td>
+                <td>86.07%</td>
+              </tr>
+              <tr class="tier-a highlight-row">
+                <td>Pythagoras-Prover-32B</td>
+                <td>32</td>
+                <td>89.75%</td>
+              </tr>
+
+              <!-- Tier B: medium budget (Pass = 1024) -->
+              <tr class="tier-label"><td colspan="3">Pass = 1024</td></tr>
+              <tr class="tier-b">
+                <td>Kimina-Prover-70B</td>
+                <td>1024</td>
+                <td>87.7%</td>
+              </tr>
+              <tr class="tier-b">
+                <td>Goedel-Prover-V2-8B</td>
+                <td>1024</td>
+                <td>87.9%</td>
+              </tr>
+              <tr class="tier-b">
+                <td>Goedel-Prover-V2-8B w/ Self-Correction</td>
+                <td>1024</td>
+                <td>89.3%</td>
+              </tr>
+              <tr class="tier-b">
+                <td>Goedel-Prover-V2-32B</td>
+                <td>1024</td>
+                <td>91.8%</td>
+              </tr>
+              <tr class="tier-b">
+                <td>Goedel-Prover-V2-32B w/ Self-Correction</td>
+                <td>1024</td>
+                <td>92.6%</td>
+              </tr>
+              <tr class="tier-b highlight-row">
+                <td>Pythagoras-Prover-4B</td>
+                <td>1024</td>
+                <td>88.11%</td>
+              </tr>
+              <tr class="tier-b highlight-row">
+                <td>Pythagoras-Prover-32B</td>
+                <td>1024</td>
+                <td>92.62%</td>
+              </tr>
+
+              <!-- Tier C: large budget (Pass >= 2048) -->
+              <tr class="tier-label"><td colspan="3">Pass &ge; 2048</td></tr>
+              <tr class="tier-c">
+                <td>Goedel-Prover-SFT</td>
+                <td>3200</td>
+                <td>62.7%</td>
+              </tr>
+              <tr class="tier-c">
+                <td>STP</td>
+                <td>3200</td>
+                <td>65.0%</td>
+              </tr>
+              <tr class="tier-c">
+                <td>STP</td>
+                <td>25600</td>
+                <td>67.6%</td>
+              </tr>
+              <tr class="tier-c">
+                <td>Kimina-Prover-Preview-72B</td>
+                <td>8192</td>
+                <td>80.74%</td>
+              </tr>
+              <tr class="tier-c">
+                <td>DeepSeek-Prover-V2-7B</td>
+                <td>8192</td>
+                <td>82.0%</td>
+              </tr>
+              <tr class="tier-c">
+                <td>DeepSeek-Prover-V2-671B</td>
+                <td>8192</td>
+                <td>88.9%</td>
+              </tr>
+              <tr class="tier-c">
+                <td>Goedel-Prover-V2-8B</td>
+                <td>8192</td>
+                <td>90.2%</td>
+              </tr>
+              <tr class="tier-c">
+                <td>Kimina-Prover-70B w/ Test-Time Reinforcement Learning</td>
+                <td>--</td>
+                <td>92.2%</td>
+              </tr>
+              <tr class="tier-c">
+                <td>Goedel-Prover-V2-32B</td>
+                <td>8192</td>
+                <td>92.2%</td>
+              </tr>
+              <tr class="tier-c highlight-row">
+                <td>Pythagoras-Prover-4B</td>
+                <td>2048</td>
+                <td>89.75%</td>
+              </tr>
+              <tr class="tier-c highlight-row">
+                <td>Pythagoras-Prover-32B</td>
+                <td>2048</td>
+                <td>93.03%</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="results-table-caption">
+            Table 1: Pass@N on MiniF2F-Test across inference budgets
+          </div>
+        </div>
+
+        <div class="results-table-card">
+          <div class="table-container results-table-container">
+          <table class="table results-table alf-table">
+            <colgroup>
+              <col class="results-alf-model-col">
+              <col class="results-alf-performance-col">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="tier-b">
+                <td>DeepSeek-Prover-V2-671B</td>
+                <td>79.71%</td>
+              </tr>
+              <tr class="tier-b">
+                <td>Goedel-Prover-V2-8B</td>
+                <td>82.58%</td>
+              </tr>
+              <tr class="tier-b">
+                <td>Goedel-Prover-V2-32B</td>
+                <td>83.61%</td>
+              </tr>
+              <tr class="tier-b highlight-row">
+                <td>Pythagoras-Prover-4B</td>
+                <td>83.19%</td>
+              </tr>
+              <tr class="tier-b highlight-row">
+                <td>Pythagoras-Prover-32B</td>
+                <td>85.04%</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="results-table-caption">
+            Table 2: MiniF2F-ALF Performance (Pass@32)
+          </div>
+        </div>
+
+        <div class="results-table-card">
+          <div class="table-container results-table-container">
+          <table class="table results-table putnam-table">
+            <colgroup>
+              <col class="results-rank-col">
+              <col class="results-putnam-model-col">
+              <col class="results-open-col">
+              <col class="results-compute-col">
+              <col class="results-solved-col">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Model</th>
+                <th>Open-source</th>
+                <th>Compute</th>
+                <th>Num-solved</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="tier-c highlight-row">
+                <td>1</td>
+                <td>Pythagoras-Prover</td>
+                <td>&#10003;</td>
+                <td>pass@2048</td>
+                <td>93</td>
+              </tr>
+              <tr class="tier-a highlight-row">
+                <td>1</td>
+                <td>Pythagoras-Prover</td>
+                <td>&#10003;</td>
+                <td>pass@64</td>
+                <td>59</td>
+              </tr>
+              <tr class="tier-a highlight-row">
+                <td>1</td>
+                <td>Pythagoras-Prover</td>
+                <td>&#10003;</td>
+                <td>pass@32</td>
+                <td>48</td>
+              </tr>
+              <tr class="tier-b">
+                <td>2</td>
+                <td>Goedel-Prover-V2 (self-correction mode)</td>
+                <td>&#10003;</td>
+                <td>pass@184</td>
+                <td>86</td>
+              </tr>
+              <tr class="tier-a">
+                <td>2</td>
+                <td>Goedel-Prover-V2 (self-correction mode)</td>
+                <td>&#10003;</td>
+                <td>pass@32</td>
+                <td>57</td>
+              </tr>
+              <tr class="tier-a">
+                <td>2</td>
+                <td>Goedel-Prover-V2</td>
+                <td>&#10003;</td>
+                <td>pass@32</td>
+                <td>43</td>
+              </tr>
+              <tr class="tier-b">
+                <td>3</td>
+                <td>DeepSeek-Prover-V2</td>
+                <td>&#10003;</td>
+                <td>pass@1024</td>
+                <td>47</td>
+              </tr>
+              <tr class="tier-a">
+                <td>3</td>
+                <td>DeepSeek-Prover-V2</td>
+                <td>&#10003;</td>
+                <td>pass@32</td>
+                <td>22</td>
+              </tr>
+              <tr class="tier-a">
+                <td>4</td>
+                <td>DSP+</td>
+                <td>&#10003;</td>
+                <td>pass@128</td>
+                <td>23</td>
+              </tr>
+              <tr class="tier-b">
+                <td>5</td>
+                <td>Bourbaki</td>
+                <td>&#10003;</td>
+                <td>pass@512</td>
+                <td>14</td>
+              </tr>
+              <tr class="tier-b">
+                <td>6</td>
+                <td>Kimina-Prover-7B-Distill</td>
+                <td>&#10003;</td>
+                <td>pass@192</td>
+                <td>10</td>
+              </tr>
+              <tr class="tier-c">
+                <td>7</td>
+                <td>Self-play Theorem Prover</td>
+                <td>&#10003;</td>
+                <td>pass@3200</td>
+                <td>8</td>
+              </tr>
+              <tr class="tier-b">
+                <td>8</td>
+                <td>Goedel-Prover-SFT</td>
+                <td>&#10003;</td>
+                <td>pass@512</td>
+                <td>7</td>
+              </tr>
+              <tr class="tier-b">
+                <td>9</td>
+                <td>ABEL</td>
+                <td>&#10007;</td>
+                <td>pass@596</td>
+                <td>7</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="results-table-caption">
+            Table 3: PutnamBench Results
+          </div>
+        </div>
+
+        <h3 class="title is-4 results-subtitle results-subsection-spaced">Diffusion Theorem Proving</h3>
+        <div class="results-table-card">
+          <div class="table-container results-table-container">
+          <table class="table results-table diffusion-table">
+            <colgroup>
+              <col class="results-alf-model-col">
+              <col class="results-alf-performance-col">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="tier-b highlight-row">
+                <td>Pythagoras-Prover</td>
+                <td>86.07%</td>
+              </tr>
+              <tr class="tier-a highlight-row">
+                <td>Pythagoras-Prover<sup>&#8727;</sup></td>
+                <td>74.59%</td>
+              </tr>
+              <tr class="tier-c highlight-row">
+                <td>Diffusion Pythagoras-Prover</td>
+                <td>63.25%</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="results-table-note">
+            <sup>&#8727;</sup> denotes the setting where training tokens are restricted to 4096 and
+            evaluation is performed solely at 8192 tokens.
+          </div>
+          <div class="results-table-caption">
+            Table 4: Diffusion Theorem Proving Performance (Pass@32)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section analysis-section" id="analysis">
+  <div class="container">
+    <h2 class="title is-3 section-title has-text-centered">Analysis</h2>
+    <p class="subtitle is-6 analysis-kicker">
+      Four closer looks at scaling, mutation robustness, and the accuracy&ndash;throughput frontier.
+    </p>
+
+    <div class="analysis-grid">
+      <article class="analysis-card" tabindex="0">
+        <div class="analysis-card-inner">
+          <div class="analysis-face analysis-front">
+            <div class="analysis-heading">
+              <span class="analysis-icon analysis-blue"><i class="fas fa-chart-line"></i></span>
+              <h3>Scaling Analysis</h3>
+            </div>
+            <p>
+              How efficiently does Pythagoras-Prover turn inference budget into solved problems?
+              We trace pass@N from 32 to 2048 on MiniF2F-Test against the strongest open baselines.
+            </p>
+            <ul>
+              <li>Pythagoras-Prover-32B leads at every budget, reaching 93.03% at pass@2048.</li>
+              <li>Pythagoras-Prover-4B surpasses the ~167&times; larger DeepSeek-Prover-V2-671B
+                across the full range.</li>
+            </ul>
+            <span class="analysis-hint">Tap or hover to read the curve</span>
+          </div>
+          <div class="analysis-face analysis-back analysis-figtext-back">
+            <img src="./figures/pass_n_comparison_hi.png"
+                 alt="Pass@N scaling comparison">
+            <p>
+              <strong>Consistent, not budget-specific.</strong> Pythagoras-Prover-32B leads at every
+              budget and overtakes the self-correction-augmented Goedel-Prover-V2-32B from ~pass@256.
+              Even ~167&times; smaller, Pythagoras-Prover-4B beats DeepSeek-Prover-V2-671B at every
+              shared budget &mdash; its 89.75% at pass@2048 tops that model's pass@8192 (88.9%). Both
+              curves start high then flatten: strong accuracy from far fewer samples.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="analysis-card" tabindex="0">
+        <div class="analysis-card-inner">
+          <div class="analysis-face analysis-front">
+            <div class="analysis-heading">
+              <span class="analysis-icon analysis-green"><i class="fas fa-th"></i></span>
+              <h3>ALF Makes Strong Provers Distinguishable</h3>
+            </div>
+            <p>
+              MiniF2F is saturated, so strong provers rarely disagree. ALF mutation roughly doubles
+              the instances where they can be told apart &mdash; recovering discriminative power, not
+              just reshuffling winners.
+            </p>
+            <ul>
+              <li>4B vs Goedel-8B: 9 disagreements under ALF vs 7 on the original.</li>
+              <li>32B vs Goedel-32B: 17 vs 9.</li>
+            </ul>
+            <span class="analysis-hint">Tap or hover to read the map</span>
+          </div>
+          <div class="analysis-face analysis-back analysis-figtext-back analysis-distinguish-back">
+            <div class="pie-pair">
+              <figure>
+                <img src="./figures/minif2f_wrong_pie_original_hi.png"
+                     alt="Domain composition of failures on original MiniF2F">
+                <figcaption>Original &middot; 41 failures</figcaption>
+              </figure>
+              <figure>
+                <img src="./figures/minif2f_wrong_pie_alf_hi.png"
+                     alt="Domain composition of failures on MiniF2F-ALF">
+                <figcaption>MiniF2F-ALF &middot; 57 failures</figcaption>
+              </figure>
+            </div>
+            <p>
+              On original MiniF2F, failures cluster in olympiad sets (AMC + IMO &asymp; two-thirds of
+              41). Under ALF the set grows to 57 and spreads &mdash; MathD jumps to ~20%, breaking the
+              IMO/AMC concentration. ALF surfaces structurally simple cases where strong provers are
+              brittle, adding discriminative signal across the full difficulty range.
+            </p>
+            <figure class="heatmap-figure">
+              <img src="./figures/minif2f_transition_strip_hi.png"
+                   alt="Per-problem original to mutated transition heatmap">
+              <figcaption>Per-problem original&rarr;mutated transition (four-prover panel)</figcaption>
+            </figure>
+            <ul class="heatmap-legend">
+              <li><span class="sw sw-green"></span>Solved before &amp; after</li>
+              <li><span class="sw sw-orange"></span>Solved &rarr; failed (brittle)</li>
+              <li><span class="sw sw-blue"></span>Failed &rarr; solved</li>
+              <li><span class="sw sw-red"></span>Failed before &amp; after</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="analysis-card" tabindex="0">
+        <div class="analysis-card-inner">
+          <div class="analysis-face analysis-front">
+            <div class="analysis-heading">
+              <span class="analysis-icon analysis-red"><i class="fas fa-shield-alt"></i></span>
+              <h3>Robust Under ALF Perturbation</h3>
+            </div>
+            <p>
+              Re-evaluated on MiniF2F-ALF under one unified setup, every prover loses accuracy &mdash;
+              but Pythagoras-Prover retains the most, the signature of training on ALF-augmented data.
+            </p>
+            <ul>
+              <li>Pythagoras-Prover-32B keeps the highest pass rate: 85.04%.</li>
+              <li>Pythagoras-Prover-4B (83.19%) matches the 8&times; larger Goedel-32B, degrading
+                less (2.9 vs 4.5 pts).</li>
+            </ul>
+            <span class="analysis-hint">Tap or hover to see MiniF2F-ALF</span>
+          </div>
+          <div class="analysis-face analysis-back analysis-figtext-back">
+            <img src="./figures/pass32_comparison_hi.png"
+                 alt="Pass@32 performance on MiniF2F-ALF">
+            <p>
+              Every model degrades on MiniF2F-ALF, confirming a real distribution shift.
+              Pythagoras-Prover-32B holds the top pass rate (85.04%); Pythagoras-Prover-4B (83.19%) is
+              on par with the 8&times; larger Goedel-Prover-V2-32B and drops less under perturbation
+              (2.9 vs 4.5 points). Because our training corpus is itself ALF-augmented, this retention
+              is the expected signature &mdash; MiniF2F performance reflects proof ability, not
+              sensitivity to the phrasing of the test statements.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="analysis-card" tabindex="0">
+        <div class="analysis-card-inner">
+          <div class="analysis-face analysis-front">
+            <div class="analysis-heading">
+              <span class="analysis-icon analysis-yellow"><i class="fas fa-bolt"></i></span>
+              <h3>Compute Efficiency</h3>
+            </div>
+            <p>
+              Pythagoras-Prover-Diffusion trades per-attempt accuracy for substantially higher
+              generation throughput.
+            </p>
+            <ul>
+              <li>AR: 86.07% at 4.10 TPS.</li>
+              <li>Diffusion: 63.25% at 10.56 TPS.</li>
+              <li>Throughput-weighted score favors diffusion by 1.89&times;.</li>
+            </ul>
+            <span class="analysis-hint">Tap or hover for details</span>
+          </div>
+          <div class="analysis-face analysis-back analysis-text-back">
+            <h4>Compute Efficiency: AR versus Diffusion</h4>
+            <p>
+              Sharing the same self-distillation corpus and differing only in decoding (matched MiniF2F
+              pass@32, 8&times;&nbsp;H100, batch&nbsp;4), AR wins on raw accuracy, 86.07% versus 63.25%
+              (a 22.82-point gap) &mdash; but that is per-attempt only. Diffusion sustains 10.56 versus
+              4.10 TPS (2.58&times; faster), since AR decoding is sequential and costly on long
+              completions while diffusion generates block-parallel under a fixed denoising budget.
+            </p>
+            <p>
+              A throughput-weighted score <strong>S = accuracy &times; TPS</strong> gives 3.53 (AR)
+              versus 6.68 (diffusion), a 1.89&times; edge &mdash; though at this point S is dominated by
+              throughput, so it reflects compute efficiency more than proving skill. Bottom line: AR for
+              per-attempt reliability, diffusion where throughput or latency binds, with room to grow as
+              diffusion context lengths increase.
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{leang2025theorem,
+  title={Theorem prover as a judge for synthetic data generation},
+  author={Leang, Joshua Ong Jun and Hong, Giwon and Li, Wenda and Cohen, Shay B},
+  booktitle={Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={29941--29977},
+  year={2025}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            Latest update at 2026-06-10. This website is adapted from
+            <a href="https://nerfies.github.io/">Nerfies</a>, licensed under a
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sequential "PPT-style" reveal of the 3-step method pipeline.
+  (function () {
+    var pipeline = document.getElementById('method-pipeline');
+    if (!pipeline) return;
+
+    var steps = Array.prototype.slice.call(pipeline.querySelectorAll('.method-step'));
+    var arrows = Array.prototype.slice.call(pipeline.querySelectorAll('.method-arrow'));
+    var replayBtn = document.getElementById('method-replay-btn');
+    var timers = [];
+    var STEP_DELAY = 650; // ms between reveals
+
+    function reset() {
+      timers.forEach(clearTimeout);
+      timers = [];
+      steps.forEach(function (s) { s.classList.remove('is-visible'); });
+      arrows.forEach(function (a) { a.classList.remove('is-visible'); });
+    }
+
+    function play() {
+      reset();
+      // interleave: step 1, arrow, step 2, arrow, step 3
+      var sequence = [];
+      steps.forEach(function (s, i) {
+        sequence.push(s);
+        if (arrows[i]) sequence.push(arrows[i]);
+      });
+      sequence.forEach(function (el, i) {
+        timers.push(setTimeout(function () {
+          el.classList.add('is-visible');
+        }, i * STEP_DELAY + 150));
+      });
+    }
+
+    // Play once when the pipeline scrolls into view.
+    var played = false;
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && !played) {
+            played = true;
+            play();
+          }
+        });
+      }, { threshold: 0.35 });
+      io.observe(pipeline);
+    } else {
+      play();
+    }
+
+    if (replayBtn) replayBtn.addEventListener('click', play);
+  })();
+</script>
+
+<script>
+  // Tap/click support for analysis flip cards.
+  (function () {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.analysis-card'));
+    if (!cards.length) return;
+
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        cards.forEach(function (other) {
+          if (other !== card) other.classList.remove('is-flipped');
+        });
+        card.classList.toggle('is-flipped');
+      });
+
+      card.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          card.click();
+        }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
