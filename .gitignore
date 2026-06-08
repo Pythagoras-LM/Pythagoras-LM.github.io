@@ -1,0 +1,7 @@
+.DS_Store
+._*
+
+static/videos/
+static/interpolation/
+static/images/*
+!static/images/pythagoras_favicon.png
