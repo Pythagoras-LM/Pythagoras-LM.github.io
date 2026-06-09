@@ -135,7 +135,7 @@ All results use Lean 4.9.0-rc1 with a maximum generation length of 30,000 tokens
 
 > Every prover loses accuracy under ALF mutation, confirming a non-trivial distribution shift. Pythagoras-Prover-32B retains the highest pass rate, and Pythagoras-Prover-4B matches the 8× larger Goedel-Prover-V2-32B while degrading less (2.9 vs. 4.5 points).
 
-### Diffusion Theorem Proving (pass@32, %)
+<!-- ### Diffusion Theorem Proving (pass@32, %)
 
 | Model | Pass@32 |
 | --- | :---: |
@@ -143,7 +143,7 @@ All results use Lean 4.9.0-rc1 with a maximum generation length of 30,000 tokens
 | Pythagoras-Prover&#42; (autoregressive, 4K-context control) | 74.59 |
 | **Pythagoras-Prover-Diffusion** (4B) | **63.25** |
 
-> &#42; Autoregressive 4B re-trained at the matched 4,096-token context used for the diffusion model. The control isolates the diffusion gap as a context-length effect rather than a decoding-strategy one.
+> &#42; Autoregressive 4B re-trained at the matched 4,096-token context used for the diffusion model. The control isolates the diffusion gap as a context-length effect rather than a decoding-strategy one. -->
 
 
 ## 5. Models & Dataset Downloads
