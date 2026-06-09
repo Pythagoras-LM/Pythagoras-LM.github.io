@@ -41,28 +41,26 @@ We introduce **Pythagoras-Prover**, a compute-efficient family of open-source la
 
 **A Lean-Verified Synthetic Data Pipeline**
 
-- Natural-language problems from general-math and competition sources are autoformalised into Lean and gated on the type-checker; an auto-informalisation and alignment step discards faithful-but-wrong formalisations, yielding a seed corpus across easy, medium, and hard tiers built predominantly from sub-30B open models.
-
-- A failure-mode-conditioned, rubric-guided distillation stage re-prompts on each rejected instance to target the specific Lean type-checker error, lifting autoformalisation success and roughly doubling the verified training set.
-
----
-
-**Augmented Lean Formalisation (ALF) and Self-Distillation**
-
-- ALF emits one structured variant per category — simplification, generalisation, lemma proposal, proof-step decomposition, and reformulation — for every seed statement, replacing per-instance Lean verification with a cheap statement-alignment check and expanding the seed roughly 3×.
-
-- The post-RL prover then proves its own mutations; these self-distilled proofs form a corpus of ~2M instances that trains both the autoregressive and diffusion provers from a single recipe.
+- Natural-language problems from general-math and competition sources are autoformalised into Lean and gated on the type-checker using predominantly sub-30B open models, with an auto-informalisation and alignment step discarding faithful-but-wrong formalisations to yield a verified seed corpus partitioned into easy, medium, and hard tiers.
+- A rubric-guided distillation stage re-prompts on each rejected instance to target the specific Lean type-checker error responsible for its failure, lifting autoformalisation success and roughly doubling the verified training set.
 
 ---
 
-**Compute-Efficient Training**
+**Model Training**
 
-- LoRA-only supervised fine-tuning under an 8K context, paired with a dynamic proof-reasoning filter and a difficulty-ordered easy→medium→hard curriculum, followed by reinforcement learning with a Lean-compilation reward and a final continued-SFT stage on the ALF corpus.
+- LoRA-only supervised fine-tuning of Qwen3-4B and Qwen3-32B under an 8K context, paired with a dynamic proof-reasoning filter and a difficulty-ordered easy→medium→hard curriculum, followed by reinforcement learning with a Lean-compilation reward and a final continued-SFT stage on the ALF corpus.
 
 ---
 
-**The First Diffusion-Based Theorem Prover**
+**Augmented Lean Formalisation**
+- ALF emits one structured variant per category — simplification, generalisation, lemma proposal, proof-step decomposition, and reformulation — for every seed statement, replacing per-instance Lean verification with a cheap statement-alignment check and expanding the seed corpus into roughly 2M formal variants.
+- The post-RL prover proves the mutations, and these self-distilled proofs form a corpus that trains both the autoregressive and diffusion provers from a single recipe.
 
+---
+
+**The Smallest Efficient Open-Source Lean Theorem Prover**
+
+- We train Pythagoras-Prover-4B, one of the smallest and most compute-efficient open-source Lean theorem provers to date, reaching 86.07% on MiniF2F-Test at Pass@32 and surpassing the prior state of the art at a fraction of its parameter count.
 - Pythagoras-Prover-Diffusion adapts a block-diffusion formulation with a tactic-based masking objective aligned to the discrete reasoning steps of Lean — to our knowledge the first demonstration that a diffusion language model can verifiably solve Lean theorems at non-trivial rates.
 
 ---
