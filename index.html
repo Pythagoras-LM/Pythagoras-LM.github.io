@@ -155,7 +155,7 @@
             <em>Augmented Lean Formalisation</em> (ALF), a mutation scheme that expands the training corpus via
             structured formal variants, paired with a self-distillation stage that re-uses these variants without
             requiring formal verification. Empirically, Pythagoras-Prover-32B achieves state-of-the-art performance
-            among open-source neural theorem provers, attaining 93.03% on MiniF2F-Test and solving 93 of 672
+            among open-source neural theorem provers, attaining 93.0% on MiniF2F-Test and solving 93 of 672
             problems on PutnamBench, while Pythagoras-Prover-4B outperforms DeepSeek-Prover-V2-671B on
             MiniF2F-Test despite being roughly 167&times; smaller. We additionally release <em>MiniF2F-ALF</em>,
             an ALF-mutated decontamination benchmark on which every evaluated model loses accuracy; on this split,
@@ -170,8 +170,8 @@
     <div class="key-findings-card">
       <h3>Key Findings and Achievements</h3>
       <ul>
-        <li>Reaches 89.75% on MiniF2F-Test at Pass@32 and 93.03% at Pass@2048.</li>
-        <li>Pythagoras-Prover-4B attains 86.07% at Pass@32, outperforming DeepSeek-Prover-V2-671B (82.4%) while being roughly 167&times; smaller.</li>
+        <li>Reaches 89.8% on MiniF2F-Test at Pass@32 and 93.0% at Pass@2048.</li>
+        <li>Pythagoras-Prover-4B attains 86.1% at Pass@32, outperforming DeepSeek-Prover-V2-671B (82.4%) while being roughly 167&times; smaller.</li>
         <li>Ranks 1st on the PutnamBench leaderboard among open-source models.</li>
         <li>Releases MiniF2F-ALF, a 488-statement less-saturated benchmark where every evaluated prover degrades.</li>
         <li>Uses ALF to expand training to ~2M structured Lean variants without per-instance compilation.</li>
@@ -181,7 +181,7 @@
     </div>
 
     <figure class="key-findings-figure">
-      <img src="./figures/prover_fig1_hi.png"
+      <img src="./figures/prover_fig1_v2_hi.png"
            alt="Pythagoras-Prover benchmark overview">
     </figure>
 
@@ -347,12 +347,12 @@
               <tr class="tier-a highlight-row">
                 <td>Pythagoras-Prover-4B</td>
                 <td>32</td>
-                <td>86.07%</td>
+                <td>86.1%</td>
               </tr>
               <tr class="tier-a highlight-row">
                 <td>Pythagoras-Prover-32B</td>
                 <td>32</td>
-                <td>89.75%</td>
+                <td>89.8%</td>
               </tr>
 
               <!-- Tier B: medium budget (Pass = 1024) -->
@@ -385,12 +385,12 @@
               <tr class="tier-b highlight-row">
                 <td>Pythagoras-Prover-4B</td>
                 <td>1024</td>
-                <td>88.11%</td>
+                <td>88.1%</td>
               </tr>
               <tr class="tier-b highlight-row">
                 <td>Pythagoras-Prover-32B</td>
                 <td>1024</td>
-                <td>92.62%</td>
+                <td>92.6%</td>
               </tr>
 
               <!-- Tier C: large budget (Pass >= 2048) -->
@@ -443,12 +443,12 @@
               <tr class="tier-c highlight-row">
                 <td>Pythagoras-Prover-4B</td>
                 <td>2048</td>
-                <td>89.75%</td>
+                <td>89.8%</td>
               </tr>
               <tr class="tier-c highlight-row">
                 <td>Pythagoras-Prover-32B</td>
                 <td>2048</td>
-                <td>93.03%</td>
+                <td>93.0%</td>
               </tr>
             </tbody>
           </table>
@@ -474,23 +474,23 @@
             <tbody>
               <tr class="tier-b">
                 <td>DeepSeek-Prover-V2-671B</td>
-                <td>79.71%</td>
+                <td>79.7%</td>
               </tr>
               <tr class="tier-b">
                 <td>Goedel-Prover-V2-8B</td>
-                <td>82.58%</td>
+                <td>82.6%</td>
               </tr>
               <tr class="tier-b">
                 <td>Goedel-Prover-V2-32B</td>
-                <td>83.61%</td>
+                <td>83.6%</td>
               </tr>
               <tr class="tier-b highlight-row">
                 <td>Pythagoras-Prover-4B</td>
-                <td>83.19%</td>
+                <td>83.2%</td>
               </tr>
               <tr class="tier-b highlight-row">
                 <td>Pythagoras-Prover-32B</td>
-                <td>85.04%</td>
+                <td>85.0%</td>
               </tr>
             </tbody>
           </table>
@@ -643,15 +643,15 @@
             <tbody>
               <tr class="tier-b highlight-row">
                 <td>Pythagoras-Prover</td>
-                <td>86.07%</td>
+                <td>86.1%</td>
               </tr>
               <tr class="tier-a highlight-row">
                 <td>Pythagoras-Prover<sup>&#8727;</sup></td>
-                <td>74.59%</td>
+                <td>74.6%</td>
               </tr>
               <tr class="tier-c highlight-row">
                 <td>Diffusion Pythagoras-Prover</td>
-                <td>63.25%</td>
+                <td>63.3%</td>
               </tr>
             </tbody>
           </table>
@@ -692,7 +692,7 @@
               We trace pass@N from 32 to 2048 on MiniF2F-Test against the strongest open baselines.
             </p>
             <ul>
-              <li>Pythagoras-Prover-32B leads at every budget, reaching 93.03% at pass@2048.</li>
+              <li>Pythagoras-Prover-32B leads at every budget, reaching 93.0% at pass@2048.</li>
               <li>Pythagoras-Prover-4B surpasses the ~167&times; larger DeepSeek-Prover-V2-671B
                 across the full range.</li>
             </ul>
@@ -705,7 +705,7 @@
               <strong>Consistent, not budget-specific.</strong> Pythagoras-Prover-32B leads at every
               budget and overtakes the self-correction-augmented Goedel-Prover-V2-32B from ~pass@256.
               Even ~167&times; smaller, Pythagoras-Prover-4B beats DeepSeek-Prover-V2-671B at every
-              shared budget &mdash; its 89.75% at pass@2048 tops that model's pass@8192 (88.9%). Both
+              shared budget &mdash; its 89.8% at pass@2048 tops that model's pass@8192 (88.9%). Both
               curves start high then flatten: strong accuracy from far fewer samples.
             </p>
           </div>
@@ -777,8 +777,8 @@
               but Pythagoras-Prover retains the most, the signature of training on ALF-augmented data.
             </p>
             <ul>
-              <li>Pythagoras-Prover-32B keeps the highest pass rate: 85.04%.</li>
-              <li>Pythagoras-Prover-4B (83.19%) matches the 8&times; larger Goedel-32B, degrading
+              <li>Pythagoras-Prover-32B keeps the highest pass rate: 85.0%.</li>
+              <li>Pythagoras-Prover-4B (83.2%) matches the 8&times; larger Goedel-32B, degrading
                 less (2.9 vs 4.5 pts).</li>
             </ul>
             <span class="analysis-hint">Tap or hover to see MiniF2F-ALF</span>
@@ -788,7 +788,7 @@
                  alt="Pass@32 performance on MiniF2F-ALF">
             <p>
               Every model degrades on MiniF2F-ALF, confirming a real distribution shift.
-              Pythagoras-Prover-32B holds the top pass rate (85.04%); Pythagoras-Prover-4B (83.19%) is
+              Pythagoras-Prover-32B holds the top pass rate (85.0%); Pythagoras-Prover-4B (83.2%) is
               on par with the 8&times; larger Goedel-Prover-V2-32B and drops less under perturbation
               (2.9 vs 4.5 points). Because our training corpus is itself ALF-augmented, this retention
               is the expected signature &mdash; MiniF2F performance reflects proof ability, not
@@ -810,8 +810,8 @@
               generation throughput.
             </p>
             <ul>
-              <li>AR: 86.07% at 4.10 TPS.</li>
-              <li>Diffusion: 63.25% at 10.56 TPS.</li>
+              <li>AR: 86.1% at 4.10 TPS.</li>
+              <li>Diffusion: 63.3% at 10.56 TPS.</li>
               <li>Throughput-weighted score favors diffusion by 1.89&times;.</li>
             </ul>
             <span class="analysis-hint">Tap or hover for details</span>
@@ -820,8 +820,8 @@
             <h4>Compute Efficiency: AR versus Diffusion</h4>
             <p>
               Sharing the same self-distillation corpus and differing only in decoding (matched MiniF2F
-              pass@32, 8&times;&nbsp;H100, batch&nbsp;4), AR wins on raw accuracy, 86.07% versus 63.25%
-              (a 22.82-point gap) &mdash; but that is per-attempt only. Diffusion sustains 10.56 versus
+              pass@32, 8&times;&nbsp;H100, batch&nbsp;4), AR wins on raw accuracy, 86.1% versus 63.3%
+              (a 22.8-point gap) &mdash; but that is per-attempt only. Diffusion sustains 10.56 versus
               4.10 TPS (2.58&times; faster), since AR decoding is sequential and costly on long
               completions while diffusion generates block-parallel under a fixed denoising budget.
             </p>
