@@ -90,7 +90,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2502.13137"
+                <a href="https://arxiv.org/pdf/2606.12594"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -144,23 +144,36 @@
         <h2 class="title is-3 section-title has-text-centered">Introduction</h2>
         <div class="content has-text-justified">
           <p>
-            We introduce Pythagoras-Prover, a compute-efficient family of open-source large language models
-            for formal theorem proving in Lean. The family comprises two standard autoregressive models with
-            parameter counts of 4B and 32B together with the first diffusion-based theorem-proving model, which
-            performs iterative refinement over Lean proofs at inference time. Its training recipe centres on a
-            Lean-verified synthetic data pipeline that produces a training corpus across easy, medium, and hard
-            difficulty tiers; complementing the pipeline are a parameter-efficient supervised fine-tuning stage
-            equipped with a dynamic <em>proof-reasoning filtering</em> scheme that retains long proofs within a
-            short context budget, and a final reinforcement-learning stage. Within the data pipeline we propose
-            <em>Augmented Lean Formalisation</em> (ALF), a mutation scheme that expands the training corpus via
-            structured formal variants, paired with a self-distillation stage that re-uses these variants without
-            requiring formal verification. Empirically, Pythagoras-Prover-32B achieves state-of-the-art performance
-            among open-source neural theorem provers, attaining 93.0% on MiniF2F-Test and solving 93 of 672
-            problems on PutnamBench, while Pythagoras-Prover-4B outperforms DeepSeek-Prover-V2-671B on
-            MiniF2F-Test despite being roughly 167&times; smaller. We additionally release <em>MiniF2F-ALF</em>,
-            an ALF-mutated decontamination benchmark on which every evaluated model loses accuracy; on this split,
-            Pythagoras-Prover-32B remains the strongest evaluated prover and Pythagoras-Prover-4B reaches parity
-            with Goedel-Prover-V2-32B, the prior state of the art.
+            Modern Lean theorem provers achieve strong performance only with substantial training and
+            inference compute. This cost is driven in part by the scarcity of verified proof data and by
+            the long reasoning traces required for formal proof search, which make both supervised
+            fine-tuning and sampling expensive. We introduce Pythagoras-Prover, a compute-efficient
+            open-source family of Lean theorem provers designed to deliver strong performance under
+            practical compute budgets. The family spans two generation paradigms: two autoregressive
+            models with 4B and 32B parameters, and a first proof-of-concept diffusion-based
+            theorem-proving model (4B), which iteratively refines Lean proofs at inference time. To make
+            training more efficient, we construct a Lean-verified corpus stratified into easy, medium, and
+            hard problems and use it for curriculum supervised fine-tuning, allowing the models to acquire
+            proof skills progressively from shorter and simpler proofs to longer and more difficult ones.
+            During supervised fine-tuning, we further apply a dynamic <em>proof-reasoning filtering</em>
+            scheme that preserves informative proof traces while ensuring each training instance fits
+            within an 8k-token context budget. We further introduce <em>Augmented Lean Formalisation</em>
+            (ALF), which expands scarce verified corpora into variants of formal statements; these variants
+            are then populated through self-distillation, providing additional training signal without
+            requiring every mutated instance to be formally verified. By perturbing known problems while
+            preserving their formal character, ALF exposes the model to structured variants of verified
+            problems, reducing reliance on any single statement&rsquo;s surface form. Empirically,
+            Pythagoras-Prover demonstrates strong performance across model scales. Most notably,
+            Pythagoras-Prover-4B surpasses DeepSeek-Prover-V2-671B at pass@32 on MiniF2F-Test
+            (82.4% &rarr; 86.1%), despite using roughly 167&times; fewer parameters. Scaling to 32B
+            further yields state-of-the-art performance among open-source neural theorem provers, with
+            Pythagoras-Prover-32B attaining 93.0% on MiniF2F-Test and solving 93 of 672 problems on
+            PutnamBench. We additionally release <em>MiniF2F-ALF</em>, an ALF-mutated
+            contamination-sensitive perturbation benchmark on which every evaluated model loses accuracy;
+            on this split, Pythagoras-Prover-32B remains the strongest evaluated prover, while
+            Pythagoras-Prover-4B reaches parity with Goedel-Prover-V2-32B, the prior state of the art.
+            Together, these results show that strong Lean theorem proving need not rely exclusively on
+            frontier-scale models.
           </p>
         </div>
       </div>
@@ -847,6 +860,14 @@
   title={Pythagoras-Prover: Advancing Efficient Formal Proving via Augmented Lean Formalisation},
   author={Leang, Joshua Ong Jun and Zhao, Zheng and Stoian, Mihaela C{\u{a}}t{\u{a}}lina
              and Xu, Qiyuan and Li, Haonan and Li, Wenda and Cohen, Shay B. and Giunchiglia, Eleonora},
+  year={2026}
+}
+
+@article{leang2026pythagoras,
+  title={Pythagoras-Prover: Advancing Efficient Formal Proving via Augmented Lean Formalisation},
+  author={Leang, Joshua Ong Jun and Zhao, Zheng and Stoian, Mihaela C{\"A}
+             and Xu, Qiyuan and Li, Haonan and Li, Wenda and Cohen, Shay B. and Giunchiglia, Eleonora},
+  journal={arXiv preprint arXiv:2606.12594},
   year={2026}
 }</code></pre>
   </div>
